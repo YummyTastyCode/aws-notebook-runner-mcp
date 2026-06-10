@@ -1,0 +1,52 @@
+shape AwsNotebookRunnerMcpManifest {
+    name: String,
+    purpose: String,
+    ai_instruction: String,
+    backend_ec2_ssm_status: String,
+    backend_sagemaker_status: String,
+    capability_notebook_inspection: String,
+    capability_dry_run_planning: String,
+    capability_cost_estimation: String,
+    capability_ec2_execution: String,
+    capability_async_status: String,
+    capability_artifacts: String,
+    capability_cleanup: String,
+    boundary_no_unapproved_compute: String,
+    boundary_no_iam_mutation: String,
+    boundary_no_arbitrary_aws: String,
+    boundary_no_colab_automation: String,
+    boundary_no_quota_bypass: String,
+    boundary_cost_accuracy: String,
+    boundary_progress_accuracy: String,
+}
+
+const manifest: AwsNotebookRunnerMcpManifest = AwsNotebookRunnerMcpManifest {
+    name: "aws-notebook-runner-mcp",
+    purpose: "Run local Jupyter notebooks on temporary AWS compute with dry-run planning, guardrails, progress reporting, cost estimates, S3 artifacts, and automatic cleanup",
+    ai_instruction: "Treat this MCP as an AWS notebook execution runner, not as Google Colab automation. Prefer dry-run tools first. Never start paid compute unless execution is enabled by policy and the user provides the required confirmation token.",
+    backend_ec2_ssm_status: "EC2 plus Systems Manager is the tested execution backend. It stages notebooks in S3, launches allowlisted EC2 instances, executes notebooks through SSM, uploads artifacts, reports status, and terminates compute.",
+    backend_sagemaker_status: "SageMaker Notebook Jobs support is present for planning and guarded start paths, but end-to-end execution depends on AWS account quotas.",
+    capability_notebook_inspection: "Inspect and summarize local ipynb files under AWS_NOTEBOOK_RUNNER_ROOT",
+    capability_dry_run_planning: "Build execution plans without starting paid compute",
+    capability_cost_estimation: "Estimate EC2 or SageMaker compute cost from instance type and max runtime policy",
+    capability_ec2_execution: "Start guarded EC2 plus SSM notebook runs when AWS_NOTEBOOK_RUNNER_ENABLE_EXECUTION is true and confirmation_token equals START_PAID_EC2_NOTEBOOK_RUN",
+    capability_async_status: "Report phase, elapsed wall time, elapsed compute time, estimated remaining time, SSM status, EC2 state, S3 progress, artifacts, and current compute cost estimate",
+    capability_artifacts: "Upload executed notebooks and generated artifacts to the configured S3 prefix",
+    capability_cleanup: "Terminate temporary EC2 compute after run completion or failure when cleanup policy is enabled",
+    boundary_no_unapproved_compute: "Does not start paid compute by default and refuses execution without explicit policy opt-in plus confirmation token",
+    boundary_no_iam_mutation: "Does not create IAM roles, edit IAM policies, or broaden permissions",
+    boundary_no_arbitrary_aws: "Does not manage arbitrary AWS resources outside the notebook run plan",
+    boundary_no_colab_automation: "Does not automate Google Colab, open Colab runtimes, keep sessions alive, or interact with Colab browser UI",
+    boundary_no_quota_bypass: "Does not bypass AWS, SageMaker, Google, or other provider quotas and access controls",
+    boundary_cost_accuracy: "Cost reporting is an estimate and excludes EBS, S3 requests, data transfer, taxes, and official AWS billing adjustments",
+    boundary_progress_accuracy: "Progress is phase-based and not exact notebook cell-level progress unless the notebook itself writes progress markers"
+}
+
+pub fun main(world: World) -> Void raises {
+    check world.out.write(manifest.name)
+    check world.out.write("\n")
+    check world.out.write(manifest.purpose)
+    check world.out.write("\n")
+    check world.out.write(manifest.ai_instruction)
+    check world.out.write("\n")
+}

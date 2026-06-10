@@ -66,6 +66,7 @@ include = [
   "CHANGELOG.md",
   "CONTRIBUTING.md",
   "LICENSE",
+  "manifest.0",
   "SECURITY.md",
   "pyproject.toml",
 ]

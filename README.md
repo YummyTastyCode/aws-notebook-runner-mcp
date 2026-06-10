@@ -14,6 +14,13 @@ This project is not affiliated with, endorsed by, or sponsored by Amazon Web
 Services. AWS and Amazon SageMaker are trademarks of Amazon.com, Inc. or its
 affiliates.
 
+## AI-Readable Manifest
+
+This repository includes [manifest.0](manifest.0), a Zero Lang description of
+the MCP server's purpose, capabilities, and boundaries. It is intended to help AI
+agents understand that this package is an AWS notebook execution runner with
+guardrails, not Google Colab automation or a provider-limit bypass tool.
+
 ## What It Can Do
 
 - Inspect a local `.ipynb` under an allowlisted local root.
