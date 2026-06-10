@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "aws-notebook-runner": {
+      "command": "aws-notebook-runner-mcp",
+      "env": {
+        "AWS_PROFILE": "research",
+        "AWS_REGION": "eu-north-1",
+        "AWS_NOTEBOOK_RUNNER_ROOT": "/absolute/path/to/notebooks",
+        "AWS_NOTEBOOK_S3_ROOT": "s3://YOUR_BUCKET/runs",
+        "AWS_NOTEBOOK_BACKEND": "ec2_ssm",
+        "AWS_NOTEBOOK_ROLE_ARN": "arn:aws:iam::123456789012:role/EC2NotebookRunnerRole",
+        "AWS_NOTEBOOK_ALLOWED_INSTANCE_TYPES": "t3.micro,t3.small",
+        "AWS_NOTEBOOK_DEFAULT_INSTANCE_TYPE": "t3.micro",
+        "AWS_NOTEBOOK_MAX_RUNTIME_SECONDS": "1800",
+        "AWS_NOTEBOOK_MAX_ESTIMATED_COST_USD": "1"
+      }
+    }
+  }
+}
