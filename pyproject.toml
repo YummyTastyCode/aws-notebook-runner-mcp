@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "aws-notebook-runner-mcp"
-version = "0.0.1"
+version = "0.0.2"
 description = "MCP server for guarded AWS notebook execution with EC2/SSM and SageMaker planning"
 readme = "README.md"
 requires-python = ">=3.11"
